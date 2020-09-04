@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 
 const Cart = (props) => {
     const cart = props.cart;
@@ -38,10 +38,11 @@ const Cart = (props) => {
             <p><small>Shipping Cost: {shipping}</small></p>
             <p>Tax & VAT:{tax}</p>
             <p>Total Price: {grandTotal}</p>
-            <br/>
-            <Link to ="/review">
-            <button className="main-button">Review Order</button>
-            </Link>
+            <br/> {/*by default react jodi component er vitor kisu declare kora thake taile children hisebe pathai. aikhane amra shop.js theke review button ta cart .js a dekhacchi*/}
+            {
+                props.children 
+            }
+           
 
         </div>
     );
