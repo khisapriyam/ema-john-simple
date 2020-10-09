@@ -5,8 +5,10 @@ import './Product.css';
 import { Link } from 'react-router-dom';
 
 const Product = (props) => {
+    //destructuring//props theke jokjhon amra kono property read kori tokhon oitake destrucutre kore felte pari
+    const{product, handleAddProduct} = props;
     console.log(props)
-    const { img, name, seller, price, stock, key } = props.product;//shortcut
+    const { img, name, seller, price, stock, key } = product;//shortcut
     return (
         <div className="product">
             <div>
@@ -20,7 +22,7 @@ const Product = (props) => {
                 <p>Only {stock} left in stock - order soon</p>
                 {props.showAddToCart === true && <button 
                     className= "main-button"
-                    onClick = {()=> props.handleAddProduct(props.product)}
+                    onClick = {()=> handleAddProduct(product)}
                     > 
                         <FontAwesomeIcon icon={faShoppingCart} /> add to cart
                 </button>}
