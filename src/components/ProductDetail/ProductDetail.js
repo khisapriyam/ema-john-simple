@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import fakeData from '../../fakeData';
 import Product from '../Product/Product';
 
 const ProductDetail = () => {
-    const {productKey} = useParams();//useParams k call kore productKey k khujtesi and same name match korte hobe
-    const product = fakeData.find(pd => pd.key === productKey);//database theke data load kora laage taile use effect use korba. aikhane shortcut a fakaData use kora hoise
-    console.log(product);
+    const {productKey} = useParams();
+    const [product, setProduct] = useState({});
 
+    useEffect(() => {
+        fetch('http://localhost:5000/product/' + productKey)
+        .then(res => res.json())
+        .then(data => setProduct(data))
+    }, [productKey]);
+    
     return (
         <div>
-            <h1>{productKey} Detail Coming Soon</h1>
-            <Product showAddToCart={false} product={product}></Product>{/*ai jaigai amra jokhon shop er product a click korbo tokhon shop page a product er detail dekhabe. amra Shop.js theke props hisebe {product} k pathacchi */}
+            <h1>Product id: {productKey}</h1>
+            <Product showAddToCart={false} product={product}></Product>
         </div>
     );
 };

@@ -11,3 +11,12 @@
     transform: rotate(360deg);
   }
 }
+.loginInfo{
+  color: white;
+  position: absolute;
+  left: 1030px;
+  top: 112px;
+  z-index: 1;
+  font-size: 23px;
+  font-weight:300;
+}

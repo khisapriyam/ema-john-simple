@@ -88,11 +88,12 @@ function Login() {
   
   return (
     <div style={{textAlign: 'center'}}>
+      <br/>
       {
         user.isSignedIn ? <button onClick={signOut}>Sign out</button>:
-        <button onClick={googleSignIn}>Sign in</button>
+        <button onClick={googleSignIn}>Sign in with Google</button>
       }
-      <br/>
+      <br/><br/>
       <button onClick ={fbSignIn}>Sign in using Facebook</button>
       {
         user.isSignedIn && <div>
@@ -107,9 +108,9 @@ function Login() {
       <label htmlFor="newUser">New User Registration</label>
       <form onSubmit = {handleSubmit}>
         {newUser && <input type="text" name="name" onBlur={handleBlur} placeholder="Your name"/>}<br/> 
-        <input type="text" name="email" onBlur={handleBlur} placeholder="write email" required/><br/>
-        <input type="password" name="password" onBlur={handleBlur} placeholder="your password" required/>
-        <br/>
+        <input type="text" name="email" onBlur={handleBlur} placeholder="Write email" required/><br/>
+        <input type="password" name="password" onBlur={handleBlur} placeholder="Your password" required/>
+        <br/><br/>
         <input type="submit" value={newUser ? 'Sign up' : 'Sign In'}/>
       </form>
       <p style={{color: 'red'}}>{user.error}</p>

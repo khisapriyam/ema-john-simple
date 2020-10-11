@@ -5,16 +5,15 @@ import './Product.css';
 import { Link } from 'react-router-dom';
 
 const Product = (props) => {
-    //destructuring//props theke jokjhon amra kono property read kori tokhon oitake destrucutre kore felte pari
     const{product, handleAddProduct} = props;
     console.log(props)
-    const { img, name, seller, price, stock, key } = product;//shortcut
+    const { img, name, seller, price, stock, key } = product;
     return (
         <div className="product">
             <div>
                 <img src={img} alt="" />
             </div>
-            <div>
+            <div className="name-container">
                 <h4 className="product-name"><Link to ={"/product/" + key}>{name}</Link></h4>
                 <br />
                 <p><small>by: {seller}</small></p>

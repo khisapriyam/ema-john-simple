@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import fakeData from '../../fakeData';
 import './Shop.css';
 import Product from '../Product/Product';
 import Cart from '../Cart/Cart';
@@ -8,22 +7,27 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Shop = () => {
-    const first10 = fakeData.slice(0,10)
-    const [products, setProducts] = useState(first10)
+    const [products, setProducts] = useState([])
+    const [cart, setCart] = useState([]);
 
-    const [cart, setCart] = useState([]);//usestate 0 dile hobe na because aikhane khali cart er sonkha thakbe na but product gulo  o thakbe
+    useEffect(() => {
+        fetch('http://localhost:5000/products')
+        .then(res => res.json())
+        .then(data => setProducts(data))
+    }, [])
     
     useEffect(() =>{
         const savedCart = getDatabaseCart();
-        const productKeys = Object.keys(savedCart);//object theke key ber kortesi
-        const previousCart = productKeys.map(existingKey => { //uporer line er key gulo dorei ak akta product ase seigulo amra ber kore niye asbo
-            const product = fakeData.find( pd => pd.key === existingKey);
-            product.quantity = savedCart[existingKey];
-            console.log(existingKey, savedCart[existingKey]);
-            return product;
+        const productKeys = Object.keys(savedCart);
+        fetch('http://localhost:5000/productsByKeys',{
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productKeys)
         })
-        console.log(previousCart);
-
+        .then(res => res.json())
+        .then(data => setCart(data))
     }, [])
     const handleAddProduct = (product) =>{
         //console.log("product added" ,product);
@@ -59,7 +63,7 @@ const Shop = () => {
                 }  
             </div>
             <div className="cart-container">
-                <Cart cart ={cart}> {/*link k Cart component er child hisebe set korsi */}
+                <Cart cart ={cart}> 
                     <Link to ="/review">
                         <button className="main-button">Review Order</button>
                     </Link>

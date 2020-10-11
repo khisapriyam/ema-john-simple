@@ -9,6 +9,11 @@
     color: blue;
     font-weight: 400;
 }
+.name-container{
+    padding-left: 30px;
+    padding-top:20px;
+    padding-bottom: 5px;
+}
 .main-button{
     background-color: goldenrod;
     width: 150px;
